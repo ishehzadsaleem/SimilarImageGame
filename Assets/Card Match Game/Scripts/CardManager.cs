@@ -9,9 +9,12 @@ public class CardManager : MonoBehaviour
     [Range(2, 5)] public int rowCount;
     [Range(2, 7)] public int columnCount;
     private int higherCount;
+    [SerializeField] private Transform cardParent;
+    public CardType cardType;
     void Start()
     {
         ChooseGridLayout();
+        cardType.SpawnCard(higherCount,cardType,cardParent);
     }
     void ChooseGridLayout()
     {
