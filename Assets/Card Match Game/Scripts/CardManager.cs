@@ -26,7 +26,7 @@ public class CardManager : MonoBehaviour
     public AudioSource audioSource;
     public Button nextButton;
     public bool isGameOver;
-    
+    public Text gameWon;
     void Awake()
     {
         ChooseGridLayout();
@@ -43,6 +43,7 @@ public class CardManager : MonoBehaviour
             isGameOver = true;
             nextButton.interactable = true;
             audioSource.PlayOneShot(winGame);
+            gameWon.gameObject.SetActive(true);
         }
     }
 
@@ -67,16 +68,18 @@ public class CardManager : MonoBehaviour
     }
     public void NextGame()
     {
+        gameWon.gameObject.SetActive(false);
         Debug.Log("game win");
+        ChooseGridLayout();
+        cardType.SpawnCard(higherCount,cardType,cardParent);
+        StartCoroutine(TurnGrids(false));
         isGameOver = false;
         nextButton.interactable = false;
         turnsCount = 0;
         matchesCount = 0;
         textTurnsCount.text = turnsCount.ToString();
         textMatchesCount.text = matchesCount.ToString();
-        ChooseGridLayout();
-        cardType.SpawnCard(higherCount,cardType,cardParent);
-        StartCoroutine(TurnGrids(false));
+
     }
 
     IEnumerator TurnGrids(bool type)
@@ -94,6 +97,5 @@ public class CardManager : MonoBehaviour
             _gridLayoutGroupColumn.enabled = false;
         }
     }
-    
    
 }

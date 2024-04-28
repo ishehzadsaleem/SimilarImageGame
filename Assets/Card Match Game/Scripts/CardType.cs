@@ -66,6 +66,7 @@ public class CardType : MonoBehaviour
         for (int i = 0; i < instantiatedCards.Count; i++)
         {
             instantiatedCards[i].transform.SetParent(cardParent);
+          
             instantiatedCards[i].GetComponent<Animator>().Play("Start Flipping");
         }
         Debug.Log("assigning to cards parent in canvas");
@@ -124,8 +125,6 @@ public class CardType : MonoBehaviour
         }
         _cardManager.selectedCards.Clear();
     }
-    
-    
 }
 public enum Cards : int
 {

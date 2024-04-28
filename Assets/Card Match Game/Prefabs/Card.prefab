@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -246,7 +246,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 9e8da932aeb9941259ae722aa42807d3, type: 3}
   - card: 9
     sprite: {fileID: 21300000, guid: 7bd5bd5b17cf04d11a9ac7e55f26b4f5, type: 3}
-  card: 2
+  card: 8
   _cardAnimationController: {fileID: 157052667}
   _cardManager: {fileID: 0}
 --- !u!114 &157052668
