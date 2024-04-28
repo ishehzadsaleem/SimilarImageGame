@@ -11,6 +11,7 @@ public class CardManager : MonoBehaviour
     private int higherCount;
     [SerializeField] private Transform cardParent;
     public CardType cardType;
+    public List<GameObject> selectedCards = new List<GameObject>();
     void Start()
     {
         ChooseGridLayout();

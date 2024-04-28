@@ -11,11 +11,16 @@ public class CardType : MonoBehaviour
 {
     public List<CardSprite> cardTypeSprites;
     public Cards card;
+    public Animator _cardAnimationController;
+    private CardManager _cardManager;
+
     private void Awake()
     {
     }
     void Start()
     {
+        _cardManager = FindObjectOfType<CardManager>();
+
     }
 
     void Update()
@@ -68,8 +73,51 @@ public class CardType : MonoBehaviour
         for (int i = 0; i < instantiatedCards.Count; i++)
         {
             instantiatedCards[i].transform.SetParent(cardParent);
+            instantiatedCards[i].GetComponent<Animator>().Play("Start Flipping");
         }
         Debug.Log("assigning to cards parent in canvas");
+    }
+    
+    public void MatchCard()
+    {
+        Debug.Log("card type is "+card);
+        if (_cardManager.selectedCards.Count < 2)
+        {
+            _cardAnimationController.Play("Card Flip");
+            GameObject pressedButton = EventSystem.current.currentSelectedGameObject;
+            Debug.Log("pressed button "+pressedButton);
+            pressedButton.GetComponent<Button>().interactable = false;
+            _cardManager.selectedCards.Add(pressedButton);
+        }
+        if (_cardManager.selectedCards.Count == 2)
+        {
+            if (_cardManager.selectedCards[0].GetComponent<CardType>().card == _cardManager.selectedCards[1].GetComponent<CardType>().card)
+            {
+                for (int i = 0; i < _cardManager.selectedCards.Count; i++)
+                {
+                    Destroy(_cardManager.selectedCards[i].gameObject);
+                }
+                _cardManager.selectedCards.Clear();
+                Debug.Log("Cards Matched!");
+            }
+            else
+            {
+
+                Debug.Log("Cards not Matched!");
+                StartCoroutine(ResetSelectedCards());
+            }
+        }
+    }
+    
+    IEnumerator ResetSelectedCards()
+    {
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i < _cardManager.selectedCards.Count; i++)
+        {
+            _cardManager.selectedCards[i].GetComponent<Button>().interactable = true;
+            _cardManager.selectedCards[i].GetComponent<Animator>().Play("Card Flip Reverse");
+        }
+        _cardManager.selectedCards.Clear();
     }
 }
 public enum Cards : int
