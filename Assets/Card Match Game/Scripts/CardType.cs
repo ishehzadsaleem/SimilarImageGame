@@ -13,13 +13,15 @@ public class CardType : MonoBehaviour
     public Cards card;
     public Animator _cardAnimationController;
     private CardManager _cardManager;
-
+    public event Action OnGameComplete; 
     private void Awake()
     {
     }
     void Start()
     {
         _cardManager = FindObjectOfType<CardManager>();
+        
+        
 
     }
 
@@ -81,6 +83,7 @@ public class CardType : MonoBehaviour
     public void MatchCard()
     {
         Debug.Log("card type is "+card);
+        _cardManager.audioSource.PlayOneShot(_cardManager.soundSelect);
         if (_cardManager.selectedCards.Count < 2)
         {
             _cardAnimationController.Play("Card Flip");
@@ -93,13 +96,10 @@ public class CardType : MonoBehaviour
         {
             if (_cardManager.selectedCards[0].GetComponent<CardType>().card == _cardManager.selectedCards[1].GetComponent<CardType>().card)
             {
-                for (int i = 0; i < _cardManager.selectedCards.Count; i++)
-                {
-                    Destroy(_cardManager.selectedCards[i].gameObject);
-                }
-                _cardManager.selectedCards.Clear();
                 _cardManager.matchesCount += 1;
                 _cardManager.textMatchesCount.text = _cardManager.matchesCount.ToString();
+                _cardManager.audioSource.PlayOneShot(_cardManager.soundCorrect);
+                StartCoroutine(RemoveMatchedCard());
                 Debug.Log("Cards Matched!");
             }
             else
@@ -111,10 +111,13 @@ public class CardType : MonoBehaviour
             _cardManager.turnsCount += 1;
             _cardManager.textTurnsCount.text = _cardManager.turnsCount.ToString();
         }
+
+  
     }
     
     IEnumerator ResetSelectedCards()
     {
+        _cardManager.audioSource.PlayOneShot(_cardManager.soundWrong);
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < _cardManager.selectedCards.Count; i++)
         {
@@ -123,6 +126,17 @@ public class CardType : MonoBehaviour
         }
         _cardManager.selectedCards.Clear();
     }
+    IEnumerator RemoveMatchedCard()
+    {
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i < _cardManager.selectedCards.Count; i++)
+        {
+            Destroy(_cardManager.selectedCards[i].gameObject);
+        }
+        _cardManager.selectedCards.Clear();
+    }
+    
+    
 }
 public enum Cards : int
 {
