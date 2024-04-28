@@ -98,6 +98,8 @@ public class CardType : MonoBehaviour
                     Destroy(_cardManager.selectedCards[i].gameObject);
                 }
                 _cardManager.selectedCards.Clear();
+                _cardManager.matchesCount += 1;
+                _cardManager.textMatchesCount.text = _cardManager.matchesCount.ToString();
                 Debug.Log("Cards Matched!");
             }
             else
@@ -106,6 +108,8 @@ public class CardType : MonoBehaviour
                 Debug.Log("Cards not Matched!");
                 StartCoroutine(ResetSelectedCards());
             }
+            _cardManager.turnsCount += 1;
+            _cardManager.textTurnsCount.text = _cardManager.turnsCount.ToString();
         }
     }
     

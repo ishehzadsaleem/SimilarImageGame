@@ -1333,6 +1333,10 @@ MonoBehaviour:
   cardParent: {fileID: 1468418351}
   cardType: {fileID: 1539885722, guid: 7e77c0a50b3694b53b13ce182d90c48c, type: 3}
   selectedCards: []
+  matchesCount: 0
+  textMatchesCount: {fileID: 628129982}
+  turnsCount: 0
+  textTurnsCount: {fileID: 1356869140}
 --- !u!4 &2009090314
 Transform:
   m_ObjectHideFlags: 0

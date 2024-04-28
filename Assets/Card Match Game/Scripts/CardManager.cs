@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class CardManager : MonoBehaviour
@@ -12,6 +13,11 @@ public class CardManager : MonoBehaviour
     [SerializeField] private Transform cardParent;
     public CardType cardType;
     public List<GameObject> selectedCards = new List<GameObject>();
+    public int matchesCount;
+    public Text textMatchesCount;
+    public int turnsCount;
+    public Text textTurnsCount;
+    
     void Start()
     {
         ChooseGridLayout();
