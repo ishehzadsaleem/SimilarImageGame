@@ -12,22 +12,13 @@ public class CardType : MonoBehaviour
     public List<CardSprite> cardTypeSprites;
     public Cards card;
     public Animator _cardAnimationController;
-    private CardManager _cardManager;
-    public event Action OnGameComplete; 
+    public CardManager _cardManager;
     private void Awake()
     {
     }
     void Start()
     {
         _cardManager = FindObjectOfType<CardManager>();
-        
-        
-
-    }
-
-    void Update()
-    {
-        
     }
     public void SpawnCard(int size,CardType cardPrefab,Transform cardParent)
     {
@@ -79,7 +70,6 @@ public class CardType : MonoBehaviour
         }
         Debug.Log("assigning to cards parent in canvas");
     }
-    
     public void MatchCard()
     {
         Debug.Log("card type is "+card);
@@ -89,7 +79,6 @@ public class CardType : MonoBehaviour
             _cardAnimationController.Play("Card Flip");
             GameObject pressedButton = EventSystem.current.currentSelectedGameObject;
             Debug.Log("pressed button "+pressedButton);
-            pressedButton.GetComponent<Button>().interactable = false;
             _cardManager.selectedCards.Add(pressedButton);
         }
         if (_cardManager.selectedCards.Count == 2)

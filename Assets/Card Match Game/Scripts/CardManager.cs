@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private GridLayoutGroup _gridLayoutGroupRow,_gridLayoutGroupColumn;
+    public GridLayoutGroup _gridLayoutGroupRow,_gridLayoutGroupColumn;
     [Range(2, 5)] public int rowCount;
     [Range(2, 7)] public int columnCount;
     private int higherCount;
@@ -26,16 +26,20 @@ public class CardManager : MonoBehaviour
     public AudioSource audioSource;
     public Button nextButton;
     public bool isGameOver;
-    void Start()
+    
+    void Awake()
     {
         ChooseGridLayout();
         cardType.SpawnCard(higherCount,cardType,cardParent);
+        StartCoroutine(TurnGrids(false));
     }
 
     private void Update()
     {
         if (cardParent.transform.childCount <= 0 && isGameOver == false)
         {
+            Debug.Log("game over");
+            StartCoroutine(TurnGrids(true));
             isGameOver = true;
             nextButton.interactable = true;
             audioSource.PlayOneShot(winGame);
@@ -72,5 +76,24 @@ public class CardManager : MonoBehaviour
         textMatchesCount.text = matchesCount.ToString();
         ChooseGridLayout();
         cardType.SpawnCard(higherCount,cardType,cardParent);
+        StartCoroutine(TurnGrids(false));
     }
+
+    IEnumerator TurnGrids(bool type)
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("turning off grid layout groups");
+        if (type)
+        {
+            _gridLayoutGroupRow.enabled = true;
+            _gridLayoutGroupColumn.enabled = true;
+        }
+        else
+        {
+            _gridLayoutGroupRow.enabled = false;
+            _gridLayoutGroupColumn.enabled = false;
+        }
+    }
+    
+   
 }

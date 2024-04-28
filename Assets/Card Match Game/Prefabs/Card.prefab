@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
+  m_Color: {r: 0.49803922, g: 0.49803922, b: 0.49803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4749608934269031356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -246,8 +246,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 9e8da932aeb9941259ae722aa42807d3, type: 3}
   - card: 9
     sprite: {fileID: 21300000, guid: 7bd5bd5b17cf04d11a9ac7e55f26b4f5, type: 3}
-  card: 8
+  card: 2
   _cardAnimationController: {fileID: 157052667}
+  _cardManager: {fileID: 0}
 --- !u!114 &157052668
 MonoBehaviour:
   m_ObjectHideFlags: 0

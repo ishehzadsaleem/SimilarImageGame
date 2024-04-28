@@ -17,13 +17,16 @@ public class CardAnimationController : MonoBehaviour
     {
         
     }
-
     public void AnimationComplete()
     {
         cardSprite.enabled = true;
+        GetComponent<Image>().color = Color.white;
+        GetComponent<Button>().enabled = false;
     }
     public void AnimationComplete_SpriteOff()
     {
         cardSprite.enabled = false;
+        GetComponent<Image>().color = Color.gray;
+        GetComponent<Button>().enabled = true;
     }
 }
